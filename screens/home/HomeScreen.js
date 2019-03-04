@@ -13,54 +13,45 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../../components/StyledText';
 
 export default class HomeScreen extends React.Component {
+
+  state = {
+    categories: [{'name':'Bakery'},
+                {'name': 'Cheese'},
+                {'name': 'Frozen'},
+                {'name': 'Meat & Seafood'},
+                {'name': 'Milk, Yogurt & Eggs'},
+                {'name': 'Mylk Exclusives'},
+                {'name': 'Pantry'},
+                {'name': 'Personal Care'},
+                {'name': 'Prepared'},
+                {'name': 'Snacks'},
+                {'name': 'Specialty'},
+                {'name': 'Sweets'}
+              ]
+  }
+
   static navigationOptions = {
     header: null,
   };
 
   render() {
+
+    const categoryViews =
+      this.state.categories.map((category, i) => {
+      return (
+        <View style={styles.categoryItem} key={i}>
+            <Text>
+              {category.name}
+            </Text>
+        </View>
+      )
+    })
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../../assets/images/robot-dev.png')
-                  : require('../../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
+          {categoryViews}
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>First tab</Text>
-          <Text style={styles.tabBarInfoText}>Second tab</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
       </View>
     );
   }
@@ -188,4 +179,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  categoryItem: {
+    fontSize: 48,
+    color: 'black',
+    width: '100%',
+    height: 60,
+    padding: 10
+  }
 });
