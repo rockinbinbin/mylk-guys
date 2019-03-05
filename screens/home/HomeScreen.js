@@ -36,7 +36,8 @@ export default class HomeScreen extends React.Component {
   };
 
   onPressCategory = (i) => {
-    // navigate('Profile', {name: 'Jane'})
+    const { navigate } = this.props.navigation
+    navigate('Menu', {category: this.state.categories[i]})
   }
 
   render() {
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   },
   categoryItem: {
     width: '100%',
-    height:60,
+    height:80,
     padding: 10,
     flex: 1,
     justifyContent: 'center',

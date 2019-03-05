@@ -36,7 +36,7 @@ export default class HomeScreen extends React.Component {
   };
 
   onPressCategory = (i) => {
-    navigate('Menu', {name: this.state.categories[i]})
+    // navigate('Menu', {name: this.state.categories[i]})
   }
 
   render() {
@@ -54,7 +54,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar></Navbar>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.scrollViewContainer}>
           {categoryViews}
         </ScrollView>
       </View>
@@ -98,7 +98,16 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    marginTop: 50,
+    width: '100%'
+  },
+  scrollViewContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10
   },
   developmentModeText: {
     marginBottom: 20,
@@ -106,9 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
   },
   navigationFilename: {
     marginTop: 5,
@@ -118,14 +124,19 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   categoryItem: {
-    width: '100%',
-    height:60,
+    width: 150,
+    height:150,
     padding: 10,
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: 'green',
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10
   },
   categoryText: {
-    fontSize: 18
+    fontSize: 18,
+    color: 'white'
   }
 });
