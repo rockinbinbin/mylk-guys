@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 8303,
+  "packagerPort": 19003,
+  "packagerPid": 15951,
   "expoServerNgrokUrl": "https://xj-mq2.rockinbinbin.mylk-guys-project.exp.direct",
   "packagerNgrokUrl": "https://packager.xj-mq2.rockinbinbin.mylk-guys-project.exp.direct",
-  "ngrokPid": 8322
+  "ngrokPid": 15974
 }

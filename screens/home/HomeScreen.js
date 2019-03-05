@@ -7,10 +7,11 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TouchableHighlight
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-import { MonoText } from '../../components/StyledText';
+import { Navbar } from '../../components/Navbar';
 
 export default class HomeScreen extends React.Component {
 
@@ -34,21 +35,25 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  render() {
+  onPressCategory = (i) => {
+    // navigate('Profile', {name: 'Jane'})
+  }
 
+  render() {
     const categoryViews =
       this.state.categories.map((category, i) => {
       return (
-        <View style={styles.categoryItem} key={i}>
-            <Text>
+        <TouchableHighlight onPress={() => {this.onPressCategory(i)}} style={styles.categoryItem} key={i}>
+            <Text style={styles.categoryText}>
               {category.name}
             </Text>
-        </View>
+        </TouchableHighlight>
       )
     })
 
     return (
       <View style={styles.container}>
+        <Navbar></Navbar>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           {categoryViews}
         </ScrollView>
@@ -93,7 +98,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   developmentModeText: {
     marginBottom: 20,
@@ -104,39 +109,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
   },
   tabBarInfoContainer: {
     flex: 1,
@@ -180,10 +152,14 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   categoryItem: {
-    fontSize: 48,
-    color: 'black',
     width: '100%',
-    height: 60,
-    padding: 10
+    height:60,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  categoryText: {
+    fontSize: 18
   }
 });
