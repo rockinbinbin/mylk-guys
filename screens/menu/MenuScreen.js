@@ -12,6 +12,8 @@ import {
 import { WebBrowser } from 'expo';
 
 import { Navbar } from '../../components/Navbar';
+import Heart from '../../assets/images/heart.svg'
+import HeartFilled from '../../assets/images/heart-filled.svg'
 
 export default class HomeScreen extends React.Component {
 
@@ -39,6 +41,12 @@ export default class HomeScreen extends React.Component {
     // navigate('Menu', {name: this.state.categories[i]})
   }
 
+  toggleHeart = (i) => {
+    // let updatedCategories = this.state.categories
+    // updatedCategories[i].heart = updatedCategories.heart && !updatedCategories[i].heart
+    // this.setState({ categories: updatedCategories })
+  }
+
   render() {
     const categoryViews =
       this.state.categories.map((category, i) => {
@@ -47,6 +55,12 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.categoryText}>
               {category.name}
             </Text>
+            {/* <TouchableHighlight onPress={(i) => this.toggleHeart(i)}>
+              <Image
+                 source={category.heart ? HeartFilled : Heart}
+                 style={styles.welcomeImage}
+               />
+             </TouchableHighlight> */}
         </TouchableHighlight>
       )
     })
