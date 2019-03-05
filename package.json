@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "algoliasearch": "^3.32.0",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-instantsearch-dom": "^5.4.0",
+    "react-instantsearch-native": "^5.4.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-navigation": "^3.0.9"
   },

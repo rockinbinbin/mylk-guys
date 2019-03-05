@@ -2,10 +2,29 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, Hits } from 'react-instantsearch-dom';
+import InfiniteHits from './src/InfiniteHits';
+import SearchBox from './src/SearchBox';
+
+const searchClient = algoliasearch(
+  'W50IY35HLI',
+  '25a8cc0ac7a8e8204a7cfccaf1635752'
+);
+
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
+  };
+
+  root = {
+    Root: View,
+    props: {
+      style: {
+        flex: 1,
+      },
+    },
   };
 
   render() {
@@ -19,10 +38,21 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        // <View style={styles.container}>
+        //   {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        //   <AppNavigator />
+          <InstantSearch
+            searchClient={searchClient}
+            indexName="products_production"
+            root={this.root}
+          >
+            <SearchBox />
+            <InfiniteHits />
+
+            <AppNavigator />
+
+          </InstantSearch>
+        // </View>
       );
     }
   }
@@ -46,7 +76,7 @@ export default class App extends React.Component {
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
-    console.warn(error);
+    console.error(error);
   };
 
   _handleFinishLoading = () => {
