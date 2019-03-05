@@ -111,6 +111,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   tabBarInfoContainer: {
     flex: 1,
@@ -154,14 +156,18 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
   categoryItem: {
-    width: '100%',
-    height:80,
-    padding: 10,
+    width: '90%',
+    height: 100,
+    padding: 20,
+    marginBottom: 10,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: 'blue'
   },
   categoryText: {
-    fontSize: 18
+    fontSize: 18,
+    color: 'white'
   }
 });
