@@ -54,19 +54,24 @@ const styles = StyleSheet.create({
 
 const InfiniteHits = ({ hits, hasMore, refine }) => {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      {
-        hits.map((category, i) => {
-            return (
-              <TouchableHighlight onPress={() => {this.onPressCategory(i)}} style={styles.categoryItem} key={i}>
-                  <Text style={styles.categoryText}>
-                    {category.title}
-                  </Text>
-              </TouchableHighlight>
-            )
-          })
-        }
-    </ScrollView>
+    <FlatList
+      data={hits}
+      keyExtractor={item => item.objectID}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
+      onEndReached={() => hasMore && refine()}
+      renderItem={({ item }) => (
+        <TouchableHighlight onPress={(item) => {this.props.onPress(item)}}>
+          <View style={styles.categoryItem}>
+          {
+            console.log('item: ', item.featured_image_url_100)
+          }
+          <Image style={styles.imagestyle} source={{uri:`${item.featured_image_url_100}`}} />
+            <Text style={styles.categoryText}>
+              {item.title}
+            </Text>
+          </View>
+        </TouchableHighlight>
+      )}
   )
 }
 

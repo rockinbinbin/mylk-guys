@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, FlatList, TouchableHighlight, Image } from 'rea
 import PropTypes from 'prop-types';
 import { connectInfiniteHits } from 'react-instantsearch-native';
 
+import Heart from '../assets/images/heart.svg'
+import HeartFilled from '../assets/images/heart-filled.svg'
+
 const styles = StyleSheet.create({
   separator: {
     borderBottomWidth: 1,
@@ -16,20 +19,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   categoryItem: {
-    width: '90%',
+    // width: '90%',
     height: 100,
     padding: 20,
     marginBottom: 10,
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    borderRadius: 20,
-    backgroundColor: 'blue'
+    // borderRadius: 20,
+    // backgroundColor: 'blue'
   },
   categoryText: {
     fontSize: 18,
-    color: 'white'
+    color: 'black'
   },  container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -56,8 +59,8 @@ const InfiniteHits = ({ hits, hasMore, refine }) => {
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       onEndReached={() => hasMore && refine()}
       renderItem={({ item }) => (
-        <TouchableHighlight onPress={(item) => {this.props.onPress(item)}} style={styles.categoryItem}>
-          <View>
+        <TouchableHighlight onPress={(item) => {this.props.onPress(item)}}>
+          <View style={styles.categoryItem}>
           {
             console.log('item: ', item.featured_image_url_100)
           }
@@ -65,11 +68,12 @@ const InfiniteHits = ({ hits, hasMore, refine }) => {
             <Text style={styles.categoryText}>
               {item.title}
             </Text>
+            {/* <Image
+               source={category.heart ? HeartFilled : Heart}
+               style={styles.welcomeImage}
+             /> */}
           </View>
         </TouchableHighlight>
-        // <View style={styles.item}>
-        //   <Text>{JSON.stringify(item).slice(0, 100)}</Text>
-        // </View>
       )}
     />
   )

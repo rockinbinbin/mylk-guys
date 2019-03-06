@@ -12,8 +12,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { Navbar } from '../../components/Navbar';
-import Heart from '../../assets/images/heart.svg'
-import HeartFilled from '../../assets/images/heart-filled.svg'
+import InfiniteHits from '../../src/InfiniteHits';
 
 export default class HomeScreen extends React.Component {
 
@@ -51,17 +50,13 @@ export default class HomeScreen extends React.Component {
     const categoryViews =
       this.state.categories.map((category, i) => {
       return (
-        <TouchableHighlight onPress={() => {this.onPressCategory(i)}} style={styles.categoryItem} key={i}>
-            <Text style={styles.categoryText}>
-              {category.name}
-            </Text>
-            {/* <TouchableHighlight onPress={(i) => this.toggleHeart(i)}>
-              <Image
-                 source={category.heart ? HeartFilled : Heart}
-                 style={styles.welcomeImage}
-               />
-             </TouchableHighlight> */}
-        </TouchableHighlight>
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="products_production"
+          root={this.root}
+        >
+          <InfiniteHits onPress={(i) => {this.onPressCategory(i)}} />
+        </InstantSearch>
       )
     })
 
