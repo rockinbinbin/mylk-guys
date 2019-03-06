@@ -13,23 +13,26 @@ import { WebBrowser } from 'expo';
 
 import { Navbar } from '../../components/Navbar';
 
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, Hits } from 'react-instantsearch-dom';
+import InfiniteHits from '../../src/InfiniteHits-Categories';
+import SearchBox from '../../src/SearchBox';
+
+const searchClient = algoliasearch(
+  'W50IY35HLI',
+  '25a8cc0ac7a8e8204a7cfccaf1635752'
+);
+
 export default class HomeScreen extends React.Component {
 
-  state = {
-    categories: [{'name':'Bakery'},
-                {'name': 'Cheese'},
-                {'name': 'Frozen'},
-                {'name': 'Meat & Seafood'},
-                {'name': 'Milk, Yogurt & Eggs'},
-                {'name': 'Mylk Exclusives'},
-                {'name': 'Pantry'},
-                {'name': 'Personal Care'},
-                {'name': 'Prepared'},
-                {'name': 'Snacks'},
-                {'name': 'Specialty'},
-                {'name': 'Sweets'}
-              ]
-  }
+  root = {
+    Root: View,
+    props: {
+      style: {
+        flex: 1,
+      },
+    },
+  };
 
   static navigationOptions = {
     header: null,
@@ -41,23 +44,19 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const categoryViews =
-      this.state.categories.map((category, i) => {
-      return (
-        <TouchableHighlight onPress={() => {this.onPressCategory(i)}} style={styles.categoryItem} key={i}>
-            <Text style={styles.categoryText}>
-              {category.name}
-            </Text>
-        </TouchableHighlight>
-      )
-    })
 
     return (
       <View style={styles.container}>
         <Navbar></Navbar>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          {categoryViews}
-        </ScrollView>
+
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="departments_production"
+          root={this.root}
+        >
+          <InfiniteHits onPress={(i) => {this.onPressCategory(i)}}/>
+        </InstantSearch>
+
       </View>
     );
   }
@@ -155,19 +154,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
-  categoryItem: {
-    width: '90%',
-    height: 100,
-    padding: 20,
-    marginBottom: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 20,
-    backgroundColor: 'blue'
-  },
-  categoryText: {
-    fontSize: 18,
-    color: 'white'
-  }
 });
